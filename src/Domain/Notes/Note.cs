@@ -1,4 +1,4 @@
-﻿namespace Notes.Domain
+﻿namespace Domain.Notes
 {
     public class Note
     {
