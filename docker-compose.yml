@@ -1,0 +1,19 @@
+version: '1.0'
+
+services:
+
+  notes-api:
+    image: notes_api
+    build:
+      context: .
+      dockerfile: src/Api/Dockerfile
+    depends_on:
+      - notes-migration-service 
+
+  notes-migration-service:
+    image: car_stock_migration_service
+    build:
+      context: .
+      dockerfile: src/MigrationService/Dockerfile
+    depends_on:
+      - mongo-db

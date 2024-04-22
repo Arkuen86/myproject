@@ -1,0 +1,19 @@
+version: '1.0'
+
+services:
+  notes-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - MigrationServiceWait__Disable=false
+      - MigrationServiceWait__HealthUrl=http://car-stock-migration-service/api/health
+    ports:
+      - "50104:80"
+
+  notes-migration-service:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - MongoConnectionString=mongodb://mongo-db:27017/CarStockService
+    ports:
+      - "50204:80"
