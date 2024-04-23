@@ -4,7 +4,7 @@ namespace Domain.Notes
 {
     public class Note
     {
-        private int id;
+        protected int id;
         private string text;
 
         public Note (string text)
