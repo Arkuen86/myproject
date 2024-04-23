@@ -16,9 +16,21 @@ namespace UnitTests.Domain.Notes
         public void ChangeText()
         {
             string txt = "abc";
-            Note mynote = new Note(txt);
+            Note mynote = new Note("txt");
+            mynote.Text = txt;
             string rez = mynote.Text;
             AssertionRequirement.Equals(txt, rez);
         }
+
+        [Fact]
+        public void del_doublSpace()
+        {
+            string txt = "a    c";
+            Note mynote = new Note(txt);
+            string rez = mynote.delDoubleSpaceText(txt);
+            AssertionRequirement.Equals("a c", rez);
+        }
+
+
     }
 }
