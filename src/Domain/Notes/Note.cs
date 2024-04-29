@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace Domain.Notes
+﻿namespace Domain.Notes
 {
     public class Note
     {
@@ -8,20 +6,20 @@ namespace Domain.Notes
 
         public string Text { get; private set; }
 
+        public Note(string text)
+        {
+            Text = text ?? throw new ArgumentNullException(nameof(text));
+        }
+
         public Note(int id, string text)
         {
             Id = id;
-            Text = text;
-        }
-
-        public Note(string text)
-        {
-            Text = text;
-        }
+            Text = text ?? throw new ArgumentNullException(nameof(text));
+        }        
 
         public void ChangeText(string text)
         {
-            Text = text;
+            Text = text ?? throw new ArgumentNullException(nameof(text));
         }
     }
 }
