@@ -1,36 +1,47 @@
+using AutoFixture;
 using Domain.Notes;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace UnitTests.Domain.Notes
 {
     public class NoteTest
     {
+        private static readonly Fixture Fixture =  new Fixture();
+
         [Fact]
         public void Ctor()
         {
-            Note mynote = new Note("txt");
+            //Arange
+            var text = Fixture.Create<string>();
+
+            //Act
+            var note = new Note(text); 
+
+            //Assert
+            Assert.Equal(text, note.Text);
+        }
+
+        [Fact]
+        public void Ctor_WithId()
+        {
+        }
+
+        [Fact]
+        public void Ctor_GivenTextIsNull_Throws()
+        {
+            //Assert
+            Assert.Throws<ArgumentNullException>(text, note.Text);
         }
 
         [Fact]
         public void ChangeText()
         {
-            string txt = "abc";
-            Note mynote = new Note("txt");
-            mynote.Text = txt;
-            string rez = mynote.Text;
-            AssertionRequirement.Equals(txt, rez);
         }
 
         [Fact]
-        public void del_doublSpace()
+        public void ChangeText_GivenTextIsNull_Throws()
         {
-            string txt = "a    c";
-            Note mynote = new Note(txt);
-            string rez = mynote.delDoubleSpaceText(txt);
-            AssertionRequirement.Equals("a c", rez);
         }
-
 
     }
 }

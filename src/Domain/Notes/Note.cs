@@ -4,29 +4,24 @@ namespace Domain.Notes
 {
     public class Note
     {
-        protected int id;
-        private string text;
+        public int Id { get; protected set; }
 
-        public Note (string text)
+        public string Text { get; private set; }
+
+        public Note(int id, string text)
         {
-            this.text = text;
+            Id = id;
+            Text = text;
         }
 
-        public int Id { get { return id; } }
-
-        public string Text { 
-            get { 
-                return text; 
-            }
-            set
-            {
-                this.text = value;
-            }
-        }
-        public string delDoubleSpaceText (string text)
+        public Note(string text)
         {
-            string result = Regex.Replace(text, @"\s+", " ");
-            return result;
+            Text = text;
+        }
+
+        public void ChangeText(string text)
+        {
+            Text = text;
         }
     }
 }

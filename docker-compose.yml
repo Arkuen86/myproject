@@ -2,18 +2,27 @@ version: '1.0'
 
 services:
 
+  sql-data:
+    image: nexcoreai/mssql-collation:Ukrainian_CI_AS
+
   notes-api:
     image: notes_api
     build:
       context: .
-      dockerfile: src/Api/Dockerfile
+      dockerfile: src/Api/Dockerfile      
+      args:
+        - FEED_URL=${FEED_URL}
+        - FEED_ACCESSTOKEN=${FEED_ACCESSTOKEN}
     depends_on:
       - notes-migration-service 
 
   notes-migration-service:
-    image: car_stock_migration_service
+    image: notes_migration_service
     build:
       context: .
       dockerfile: src/MigrationService/Dockerfile
-    depends_on:
-      - mongo-db
+      args:
+        - FEED_URL=${FEED_URL}
+        - FEED_ACCESSTOKEN=${FEED_ACCESSTOKEN}
+    depends_on:    
+      - sql-data
